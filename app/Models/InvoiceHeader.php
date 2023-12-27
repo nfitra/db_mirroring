@@ -22,4 +22,9 @@ class InvoiceHeader extends Model
         'prevBill',
         'payFine',
     ];
+
+    public function details()
+    {
+        return $this->hasMany(InvoiceDetail::class, 'billDocId', 'docId');
+    }
 }

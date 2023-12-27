@@ -19,4 +19,8 @@ class InvoiceDetail extends Model
         'billDescription',
         'billAmount',
     ];
+
+    public function header() {
+        return $this->belongsTo(InvoiceHeader::class, 'billDocId', 'docId');
+    }
 }

@@ -9,7 +9,7 @@ class CreateInvoiceHeadersTable extends Migration
     public function up()
     {
         Schema::create('invoice_headers', function (Blueprint $table) {
-            $table->unsignedBigInteger('docId')->primary();
+            $table->string('docId')->primary();
             $table->string('customerNo', 20)->nullable();
             $table->string('debtorAcct', 10)->nullable();
             $table->string('virtualAccountName')->nullable();
@@ -20,6 +20,7 @@ class CreateInvoiceHeadersTable extends Migration
             $table->decimal('totalAmount', 10, 0)->nullable();
             $table->decimal('prevBill', 10, 0)->nullable();
             $table->decimal('payFine', 10, 0)->nullable();
+            $table->timestamps();
         });
     }
 

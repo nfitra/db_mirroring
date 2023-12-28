@@ -13,13 +13,13 @@ class Login extends BaseController
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $expireAt = Carbon::now()->addMinutes(1);
+            $expireAt = Carbon::now()->addDays(1);
             $success = [
                 'token' => $user->createToken($user->name, ['*'], $expireAt)->plainTextToken,
                 'name' => $user->name
             ];
 
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse('User login successfully.', $success);
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }

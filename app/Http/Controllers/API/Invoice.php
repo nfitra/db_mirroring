@@ -13,6 +13,10 @@ class Invoice extends BaseController
     {
         $dataArray = json_decode($request->getContent(), true);
 
+        if (count($dataArray) > 500) {
+            return $this->sendError('Validation error.');
+        }
+
         $ruleHeader = [
             'docId' => 'required|string|unique:invoice_headers',
             'customerNo' => 'required|string',
@@ -70,6 +74,6 @@ class Invoice extends BaseController
             $headerCreated->details()->createMany($dataHeader['details']);
         }
 
-        return $this->sendResponse(null, 'Data invoices stored successfully.');
+        return $this->sendResponse('Data invoices stored successfully.');
     }
 }
